@@ -34,15 +34,12 @@
 
 * **Správa skladu (CRUD)**: 
   * Plná administrace palet a skladových pozic (vytvoření nové pozice, úprava informací, smazání záznamu).
-
 * **Adresné vyhledávání**: 
   * Okamžité vyhledání palety podle ID s výpisem přesné lokace.
 * **Filtrace obsazenosti**: 
   * Zobrazení všech volných pozic pro naskladnění nebo naopak seznamu všech obsazených míst v konkrétní řadě.
-
 * **Logika přesunu**: 
   * Funkce pro fyzický přesun palety mezi regály (automaticky uvolní starou pozici a obsadí novou).
-
 * **Příjem a Výdej**: 
   * Rychlé formuláře pro naskladnění nové palety a její trvalé odstranění ze systému při expedici.
 
