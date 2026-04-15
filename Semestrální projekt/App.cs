@@ -1,6 +1,6 @@
 namespace Semestrální_projekt
 {
-    internal static class Program
+    internal static class App
     {
         /// <summary>
         ///  The main entry point for the application.
@@ -11,7 +11,7 @@ namespace Semestrální_projekt
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new MainWindow());
         }
     }
 }
