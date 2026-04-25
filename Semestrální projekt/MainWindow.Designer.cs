@@ -66,6 +66,7 @@
             this.button_text5 = new Label();
             this.under_button_holder = new Panel();
             this.openFileDialog1 = new OpenFileDialog();
+            this.saveFileDialog1 = new SaveFileDialog();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.menu_left.SuspendLayout();
@@ -482,6 +483,12 @@
             this.openFileDialog1.RestoreDirectory = true;
             this.openFileDialog1.FileOk += this.openFileDialog1_FileOk;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "sqlite";
+            this.saveFileDialog1.FileName = "sklad.sqlite";
+            this.saveFileDialog1.Filter = "SQLite files (*.sqlite, *.sqlite3, *.db, *.db3, *.s3db, *.sl3)|*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3|All files (*.*)|*.*";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -496,7 +503,6 @@
             this.MinimumSize = new Size(870, 588);
             this.Name = "MainWindow";
             this.Text = "Skladový systém - BCSH1 Projekt | Václav Vellek";
-            this.Load += this.Form1_Load;
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -568,5 +574,6 @@
         private ToolStripStatusLabel toolStripStatusLabel2;
         private ToolStripStatusLabel toolStripStatusLabel3;
         private OpenFileDialog openFileDialog1;
+        private SaveFileDialog saveFileDialog1;
     }
 }

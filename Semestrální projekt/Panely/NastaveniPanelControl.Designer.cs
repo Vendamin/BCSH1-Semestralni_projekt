@@ -26,13 +26,18 @@ namespace Semestrální_projekt
             this.nastaveniTestovatBtn = new Button();
             this.label2 = new Label();
             this.nastaveni_topright = new Panel();
+            this.panel3 = new Panel();
+            this.jazykCombo = new ComboBox();
+            this.motivCombo = new ComboBox();
+            this.label9 = new Label();
+            this.label10 = new Label();
             this.label4 = new Label();
             this.nastaveni_bottomleft = new Panel();
             this.panel2 = new Panel();
             this.label13 = new Label();
             this.volnaMista = new Label();
             this.vychoziJednotka = new ComboBox();
-            this.numericUpDown1 = new NumericUpDown();
+            this.maxPocetPalet = new NumericUpDown();
             this.label12 = new Label();
             this.label14 = new Label();
             this.label5 = new Label();
@@ -41,15 +46,16 @@ namespace Semestrální_projekt
             this.nastaveni_top = new Panel();
             this.label1 = new Label();
             this.nastaveni_bottom = new Panel();
-            this.button10 = new Button();
-            this.button9 = new Button();
+            this.nastaveniSaveButton = new Button();
+            this.nastaveniCancelButton = new Button();
             this.nastaveni_center.SuspendLayout();
             this.nastaveni_topleft.SuspendLayout();
             this.panel1.SuspendLayout();
             this.nastaveni_topright.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.nastaveni_bottomleft.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.maxPocetPalet).BeginInit();
             this.nastaveni_bottomright.SuspendLayout();
             this.nastaveni_top.SuspendLayout();
             this.nastaveni_bottom.SuspendLayout();
@@ -140,8 +146,9 @@ namespace Semestrální_projekt
             this.nastaveniVytvoritBtn.Name = "nastaveniVytvoritBtn";
             this.nastaveniVytvoritBtn.Size = new Size(120, 27);
             this.nastaveniVytvoritBtn.TabIndex = 5;
-            this.nastaveniVytvoritBtn.Text = "Vytvořit zálohu";
+            this.nastaveniVytvoritBtn.Text = "Vytvořit novou";
             this.nastaveniVytvoritBtn.UseVisualStyleBackColor = false;
+            this.nastaveniVytvoritBtn.Click += this.nastaveniVytvoritBtn_Click;
             // 
             // cestaDb
             // 
@@ -154,6 +161,7 @@ namespace Semestrální_projekt
             this.cestaDb.ReadOnly = true;
             this.cestaDb.Size = new Size(223, 23);
             this.cestaDb.TabIndex = 2;
+            this.cestaDb.TextChanged += this.checkDirtyEventHandler;
             // 
             // nastaveniTestovatBtn
             // 
@@ -185,6 +193,7 @@ namespace Semestrální_projekt
             // nastaveni_topright
             // 
             this.nastaveni_topright.BackColor = Color.FromArgb(40, 55, 74);
+            this.nastaveni_topright.Controls.Add(this.panel3);
             this.nastaveni_topright.Controls.Add(this.label4);
             this.nastaveni_topright.Dock = DockStyle.Fill;
             this.nastaveni_topright.Location = new Point(307, 0);
@@ -192,6 +201,63 @@ namespace Semestrální_projekt
             this.nastaveni_topright.Name = "nastaveni_topright";
             this.nastaveni_topright.Size = new Size(294, 165);
             this.nastaveni_topright.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.panel3.Controls.Add(this.jazykCombo);
+            this.panel3.Controls.Add(this.motivCombo);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.label10);
+            this.panel3.Location = new Point(0, 22);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new Padding(0, 25, 0, 25);
+            this.panel3.Size = new Size(292, 142);
+            this.panel3.TabIndex = 9;
+            // 
+            // jazykCombo
+            // 
+            this.jazykCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.jazykCombo.FormattingEnabled = true;
+            this.jazykCombo.Location = new Point(146, 69);
+            this.jazykCombo.Name = "jazykCombo";
+            this.jazykCombo.Size = new Size(121, 23);
+            this.jazykCombo.TabIndex = 10;
+            this.jazykCombo.SelectedValueChanged += this.checkDirtyEventHandler;
+            // 
+            // motivCombo
+            // 
+            this.motivCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.motivCombo.FormattingEnabled = true;
+            this.motivCombo.Location = new Point(146, 43);
+            this.motivCombo.Name = "motivCombo";
+            this.motivCombo.Size = new Size(121, 23);
+            this.motivCombo.TabIndex = 9;
+            this.motivCombo.SelectedValueChanged += this.checkDirtyEventHandler;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.Font = new Font("Segoe UI", 11.25F);
+            this.label9.ForeColor = Color.White;
+            this.label9.Location = new Point(54, 68);
+            this.label9.Name = "label9";
+            this.label9.Size = new Size(46, 20);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Jazyk:";
+            // 
+            // label10
+            // 
+            this.label10.Anchor = AnchorStyles.None;
+            this.label10.AutoSize = true;
+            this.label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            this.label10.ForeColor = Color.White;
+            this.label10.Location = new Point(54, 43);
+            this.label10.Name = "label10";
+            this.label10.Size = new Size(50, 20);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Motiv:";
             // 
             // label4
             // 
@@ -223,7 +289,7 @@ namespace Semestrální_projekt
             this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.volnaMista);
             this.panel2.Controls.Add(this.vychoziJednotka);
-            this.panel2.Controls.Add(this.numericUpDown1);
+            this.panel2.Controls.Add(this.maxPocetPalet);
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label14);
             this.panel2.Location = new Point(0, 22);
@@ -259,22 +325,28 @@ namespace Semestrální_projekt
             // vychoziJednotka
             // 
             this.vychoziJednotka.Anchor = AnchorStyles.None;
-            this.vychoziJednotka.BackColor = Color.FromArgb(68, 77, 84);
+            this.vychoziJednotka.BackColor = SystemColors.Window;
+            this.vychoziJednotka.DropDownStyle = ComboBoxStyle.DropDownList;
             this.vychoziJednotka.FlatStyle = FlatStyle.Flat;
+            this.vychoziJednotka.ForeColor = SystemColors.WindowText;
             this.vychoziJednotka.FormattingEnabled = true;
             this.vychoziJednotka.Location = new Point(177, 81);
             this.vychoziJednotka.Name = "vychoziJednotka";
             this.vychoziJednotka.Size = new Size(112, 23);
             this.vychoziJednotka.TabIndex = 7;
+            this.vychoziJednotka.SelectedValueChanged += this.checkDirtyEventHandler;
             // 
-            // numericUpDown1
+            // maxPocetPalet
             // 
-            this.numericUpDown1.Anchor = AnchorStyles.None;
-            this.numericUpDown1.Location = new Point(178, 29);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new Size(111, 23);
-            this.numericUpDown1.TabIndex = 5;
-            this.numericUpDown1.TextAlign = HorizontalAlignment.Right;
+            this.maxPocetPalet.Anchor = AnchorStyles.None;
+            this.maxPocetPalet.Location = new Point(178, 29);
+            this.maxPocetPalet.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
+            this.maxPocetPalet.Name = "maxPocetPalet";
+            this.maxPocetPalet.Size = new Size(111, 23);
+            this.maxPocetPalet.TabIndex = 5;
+            this.maxPocetPalet.TextAlign = HorizontalAlignment.Right;
+            this.maxPocetPalet.Value = new decimal(new int[] { 100, 0, 0, 0 });
+            this.maxPocetPalet.ValueChanged += this.checkDirtyEventHandler;
             // 
             // label12
             // 
@@ -362,43 +434,45 @@ namespace Semestrální_projekt
             // 
             this.nastaveni_bottom.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.nastaveni_bottom.BackColor = Color.FromArgb(40, 55, 74);
-            this.nastaveni_bottom.Controls.Add(this.button10);
-            this.nastaveni_bottom.Controls.Add(this.button9);
+            this.nastaveni_bottom.Controls.Add(this.nastaveniSaveButton);
+            this.nastaveni_bottom.Controls.Add(this.nastaveniCancelButton);
             this.nastaveni_bottom.Location = new Point(0, 424);
             this.nastaveni_bottom.Margin = new Padding(0);
             this.nastaveni_bottom.Name = "nastaveni_bottom";
             this.nastaveni_bottom.Size = new Size(601, 50);
             this.nastaveni_bottom.TabIndex = 2;
             // 
-            // button10
+            // nastaveniSaveButton
             // 
-            this.button10.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            this.button10.BackColor = Color.FromArgb(68, 77, 84);
-            this.button10.FlatAppearance.BorderColor = Color.FromArgb(79, 92, 109);
-            this.button10.FlatStyle = FlatStyle.Flat;
-            this.button10.Font = new Font("Segoe UI", 11.25F);
-            this.button10.ForeColor = Color.White;
-            this.button10.Location = new Point(379, 16);
-            this.button10.Name = "button10";
-            this.button10.Size = new Size(98, 28);
-            this.button10.TabIndex = 1;
-            this.button10.Text = "Uložit změny";
-            this.button10.UseVisualStyleBackColor = false;
+            this.nastaveniSaveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            this.nastaveniSaveButton.BackColor = Color.FromArgb(68, 77, 84);
+            this.nastaveniSaveButton.FlatAppearance.BorderColor = Color.FromArgb(79, 92, 109);
+            this.nastaveniSaveButton.FlatStyle = FlatStyle.Flat;
+            this.nastaveniSaveButton.Font = new Font("Segoe UI", 11.25F);
+            this.nastaveniSaveButton.ForeColor = Color.White;
+            this.nastaveniSaveButton.Location = new Point(379, 16);
+            this.nastaveniSaveButton.Name = "nastaveniSaveButton";
+            this.nastaveniSaveButton.Size = new Size(98, 28);
+            this.nastaveniSaveButton.TabIndex = 1;
+            this.nastaveniSaveButton.Text = "Uložit změny";
+            this.nastaveniSaveButton.UseVisualStyleBackColor = false;
+            this.nastaveniSaveButton.Click += this.nastaveniSaveButton_Click;
             // 
-            // button9
+            // nastaveniCancelButton
             // 
-            this.button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            this.button9.BackColor = Color.FromArgb(68, 77, 84);
-            this.button9.FlatAppearance.BorderColor = Color.FromArgb(79, 92, 109);
-            this.button9.FlatStyle = FlatStyle.Flat;
-            this.button9.Font = new Font("Segoe UI", 11.25F);
-            this.button9.ForeColor = Color.White;
-            this.button9.Location = new Point(492, 16);
-            this.button9.Name = "button9";
-            this.button9.Size = new Size(104, 28);
-            this.button9.TabIndex = 0;
-            this.button9.Text = "Zrušit změny";
-            this.button9.UseVisualStyleBackColor = false;
+            this.nastaveniCancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            this.nastaveniCancelButton.BackColor = Color.FromArgb(68, 77, 84);
+            this.nastaveniCancelButton.FlatAppearance.BorderColor = Color.FromArgb(79, 92, 109);
+            this.nastaveniCancelButton.FlatStyle = FlatStyle.Flat;
+            this.nastaveniCancelButton.Font = new Font("Segoe UI", 11.25F);
+            this.nastaveniCancelButton.ForeColor = Color.White;
+            this.nastaveniCancelButton.Location = new Point(492, 16);
+            this.nastaveniCancelButton.Name = "nastaveniCancelButton";
+            this.nastaveniCancelButton.Size = new Size(104, 28);
+            this.nastaveniCancelButton.TabIndex = 0;
+            this.nastaveniCancelButton.Text = "Zrušit změny";
+            this.nastaveniCancelButton.UseVisualStyleBackColor = false;
+            this.nastaveniCancelButton.Click += this.nastaveniCancelButton_Click;
             // 
             // NastaveniPanelControl
             // 
@@ -414,10 +488,12 @@ namespace Semestrální_projekt
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.nastaveni_topright.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.nastaveni_bottomleft.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.maxPocetPalet).EndInit();
             this.nastaveni_bottomright.ResumeLayout(false);
             this.nastaveni_top.ResumeLayout(false);
             this.nastaveni_bottom.ResumeLayout(false);
@@ -442,7 +518,7 @@ namespace Semestrální_projekt
         private Label label13;
         private Label volnaMista;
         private ComboBox vychoziJednotka;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown maxPocetPalet;
         private Label label12;
         private Label label14;
         private Label label5;
@@ -451,7 +527,12 @@ namespace Semestrální_projekt
         private Panel nastaveni_top;
         private Label label1;
         private Panel nastaveni_bottom;
-        private Button button10;
-        private Button button9;
+        private Button nastaveniSaveButton;
+        private Button nastaveniCancelButton;
+        private Panel panel3;
+        private ComboBox jazykCombo;
+        private ComboBox motivCombo;
+        private Label label9;
+        private Label label10;
     }
 }
