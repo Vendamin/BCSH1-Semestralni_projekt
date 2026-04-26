@@ -54,15 +54,20 @@
             this.main_wrapper = new Panel();
             this.menu_left = new Panel();
             this.flow_button = new FlowLayoutPanel();
-            this.button1 = new Panel();
+            this.button1 = new FlowLayoutPanel();
+            this.panel1 = new Panel();
             this.button_text1 = new Label();
-            this.button2 = new Panel();
+            this.button2 = new FlowLayoutPanel();
+            this.panel2 = new Panel();
             this.button_text2 = new Label();
-            this.button3 = new Panel();
+            this.button3 = new FlowLayoutPanel();
+            this.panel3 = new Panel();
             this.button_text3 = new Label();
-            this.button4 = new Panel();
+            this.button4 = new FlowLayoutPanel();
+            this.panel4 = new Panel();
             this.button_text4 = new Label();
-            this.button5 = new Panel();
+            this.button5 = new FlowLayoutPanel();
+            this.panel5 = new Panel();
             this.button_text5 = new Label();
             this.under_button_holder = new Panel();
             this.openFileDialog1 = new OpenFileDialog();
@@ -84,9 +89,9 @@
             this.statusStrip1.GripMargin = new Padding(0);
             this.statusStrip1.Items.AddRange(new ToolStripItem[] { this.toolStripStatusLabel1, this.stavDB, this.toolStripStatusLabel2, this.pohybText, this.toolStripStatusLabel3, this.pocetVolnychMistText });
             this.statusStrip1.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip1.Location = new Point(0, 528);
+            this.statusStrip1.Location = new Point(0, 527);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new Size(861, 22);
+            this.statusStrip1.Size = new Size(948, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -108,8 +113,8 @@
             // 
             this.toolStripStatusLabel2.ForeColor = Color.White;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new Size(94, 17);
-            this.toolStripStatusLabel2.Text = "| Poslední pohy: ";
+            this.toolStripStatusLabel2.Size = new Size(101, 17);
+            this.toolStripStatusLabel2.Text = "| Poslední pohyb: ";
             // 
             // pohybText
             // 
@@ -139,7 +144,7 @@
             this.menuStrip1.Location = new Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new Padding(0);
-            this.menuStrip1.Size = new Size(861, 24);
+            this.menuStrip1.Size = new Size(948, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -153,20 +158,21 @@
             // exportovatDataToolStripMenuItem
             // 
             this.exportovatDataToolStripMenuItem.Name = "exportovatDataToolStripMenuItem";
-            this.exportovatDataToolStripMenuItem.Size = new Size(165, 22);
+            this.exportovatDataToolStripMenuItem.Size = new Size(180, 22);
             this.exportovatDataToolStripMenuItem.Text = "Exportovat data";
             // 
             // importovatZCSVToolStripMenuItem
             // 
             this.importovatZCSVToolStripMenuItem.Name = "importovatZCSVToolStripMenuItem";
-            this.importovatZCSVToolStripMenuItem.Size = new Size(165, 22);
+            this.importovatZCSVToolStripMenuItem.Size = new Size(180, 22);
             this.importovatZCSVToolStripMenuItem.Text = "Importovat z CSV";
             // 
             // konecToolStripMenuItem
             // 
             this.konecToolStripMenuItem.Name = "konecToolStripMenuItem";
-            this.konecToolStripMenuItem.Size = new Size(165, 22);
+            this.konecToolStripMenuItem.Size = new Size(180, 22);
             this.konecToolStripMenuItem.Text = "Konec";
+            this.konecToolStripMenuItem.Click += this.konecToolStripMenuItem_Click;
             // 
             // skladyToolStripMenuItem
             // 
@@ -180,6 +186,7 @@
             this.definiceŘadARegálůToolStripMenuItem.Name = "definiceŘadARegálůToolStripMenuItem";
             this.definiceŘadARegálůToolStripMenuItem.Size = new Size(218, 22);
             this.definiceŘadARegálůToolStripMenuItem.Text = "Definice řad a regálů";
+            this.definiceŘadARegálůToolStripMenuItem.Click += this.definiceŘadARegálůToolStripMenuItem_Click;
             // 
             // kontrolovaZaplněnostiToolStripMenuItem
             // 
@@ -223,7 +230,7 @@
             // 
             this.knihaPohýbůToolStripMenuItem.Name = "knihaPohýbůToolStripMenuItem";
             this.knihaPohýbůToolStripMenuItem.Size = new Size(217, 22);
-            this.knihaPohýbůToolStripMenuItem.Text = "Kniha pohýbů";
+            this.knihaPohýbůToolStripMenuItem.Text = "Kniha pohybů";
             // 
             // archivExpedovanýchPaletToolStripMenuItem
             // 
@@ -256,6 +263,7 @@
             this.nastavitCestuKDatabázyToolStripMenuItem.Name = "nastavitCestuKDatabázyToolStripMenuItem";
             this.nastavitCestuKDatabázyToolStripMenuItem.Size = new Size(207, 22);
             this.nastavitCestuKDatabázyToolStripMenuItem.Text = "Nastavit cestu k databázy";
+            this.nastavitCestuKDatabázyToolStripMenuItem.Click += this.nastavitCestuKDatabázyToolStripMenuItem_Click;
             // 
             // testPřipojeníToolStripMenuItem
             // 
@@ -318,7 +326,7 @@
             this.main_wrapper.Margin = new Padding(0);
             this.main_wrapper.Name = "main_wrapper";
             this.main_wrapper.Padding = new Padding(15);
-            this.main_wrapper.Size = new Size(631, 504);
+            this.main_wrapper.Size = new Size(718, 503);
             this.main_wrapper.TabIndex = 3;
             // 
             // menu_left
@@ -329,7 +337,7 @@
             this.menu_left.Dock = DockStyle.Left;
             this.menu_left.Location = new Point(0, 24);
             this.menu_left.Name = "menu_left";
-            this.menu_left.Size = new Size(230, 504);
+            this.menu_left.Size = new Size(230, 503);
             this.menu_left.TabIndex = 2;
             // 
             // flow_button
@@ -344,13 +352,16 @@
             this.flow_button.Location = new Point(0, 0);
             this.flow_button.Name = "flow_button";
             this.flow_button.Padding = new Padding(10);
-            this.flow_button.Size = new Size(230, 391);
+            this.flow_button.Size = new Size(230, 390);
             this.flow_button.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.BackColor = Color.FromArgb(79, 92, 109);
+            this.button1.Controls.Add(this.panel1);
             this.button1.Controls.Add(this.button_text1);
+            this.button1.Cursor = Cursors.Hand;
+            this.button1.FlowDirection = FlowDirection.TopDown;
             this.button1.Location = new Point(10, 10);
             this.button1.Margin = new Padding(0, 0, 0, 5);
             this.button1.Name = "button1";
@@ -358,23 +369,34 @@
             this.button1.TabIndex = 1;
             this.button1.Click += this.button1_Click;
             // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = Properties.Resources.map_white;
+            this.panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            this.panel1.Location = new Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new Size(207, 38);
+            this.panel1.TabIndex = 1;
+            this.panel1.Click += this.button1_Click;
+            // 
             // button_text1
             // 
-            this.button_text1.AutoSize = true;
-            this.button_text1.Dock = DockStyle.Fill;
+            this.button_text1.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             this.button_text1.ForeColor = Color.White;
-            this.button_text1.Location = new Point(0, 0);
+            this.button_text1.Location = new Point(3, 44);
             this.button_text1.Name = "button_text1";
-            this.button_text1.Padding = new Padding(70, 25, 0, 25);
-            this.button_text1.Size = new Size(134, 65);
+            this.button_text1.Size = new Size(205, 25);
             this.button_text1.TabIndex = 0;
             this.button_text1.Text = "Dashboard";
+            this.button_text1.TextAlign = ContentAlignment.MiddleCenter;
             this.button_text1.Click += this.button1_Click;
             // 
             // button2
             // 
             this.button2.BackColor = Color.FromArgb(79, 92, 109);
+            this.button2.Controls.Add(this.panel2);
             this.button2.Controls.Add(this.button_text2);
+            this.button2.Cursor = Cursors.Hand;
             this.button2.Location = new Point(10, 85);
             this.button2.Margin = new Padding(0, 0, 0, 5);
             this.button2.Name = "button2";
@@ -382,23 +404,34 @@
             this.button2.TabIndex = 2;
             this.button2.Click += this.button2_Click;
             // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = Properties.Resources.boxes_packing_white;
+            this.panel2.BackgroundImageLayout = ImageLayout.Zoom;
+            this.panel2.Location = new Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new Size(207, 38);
+            this.panel2.TabIndex = 2;
+            this.panel2.Click += this.button2_Click;
+            // 
             // button_text2
             // 
-            this.button_text2.AutoSize = true;
-            this.button_text2.Dock = DockStyle.Fill;
+            this.button_text2.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             this.button_text2.ForeColor = Color.White;
-            this.button_text2.Location = new Point(0, 0);
+            this.button_text2.Location = new Point(3, 44);
             this.button_text2.Name = "button_text2";
-            this.button_text2.Padding = new Padding(70, 25, 0, 25);
-            this.button_text2.Size = new Size(149, 65);
+            this.button_text2.Size = new Size(205, 25);
             this.button_text2.TabIndex = 0;
             this.button_text2.Text = "Palety (Zboží)";
+            this.button_text2.TextAlign = ContentAlignment.MiddleCenter;
             this.button_text2.Click += this.button2_Click;
             // 
             // button3
             // 
             this.button3.BackColor = Color.FromArgb(79, 92, 109);
+            this.button3.Controls.Add(this.panel3);
             this.button3.Controls.Add(this.button_text3);
+            this.button3.Cursor = Cursors.Hand;
             this.button3.Location = new Point(10, 160);
             this.button3.Margin = new Padding(0, 0, 0, 5);
             this.button3.Name = "button3";
@@ -406,23 +439,34 @@
             this.button3.TabIndex = 3;
             this.button3.Click += this.button3_Click;
             // 
+            // panel3
+            // 
+            this.panel3.BackgroundImage = Properties.Resources.arrow_up_from_bracket_white;
+            this.panel3.BackgroundImageLayout = ImageLayout.Zoom;
+            this.panel3.Location = new Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new Size(207, 38);
+            this.panel3.TabIndex = 2;
+            this.panel3.Click += this.button3_Click;
+            // 
             // button_text3
             // 
-            this.button_text3.AutoSize = true;
-            this.button_text3.Dock = DockStyle.Fill;
+            this.button_text3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.button_text3.ForeColor = Color.White;
-            this.button_text3.Location = new Point(0, 0);
+            this.button_text3.Location = new Point(3, 44);
             this.button_text3.Name = "button_text3";
-            this.button_text3.Padding = new Padding(70, 25, 0, 25);
-            this.button_text3.Size = new Size(146, 65);
+            this.button_text3.Size = new Size(205, 25);
             this.button_text3.TabIndex = 0;
-            this.button_text3.Text = "Příjem & Výdej";
+            this.button_text3.Text = "Příjem && Výdej";
+            this.button_text3.TextAlign = ContentAlignment.MiddleCenter;
             this.button_text3.Click += this.button3_Click;
             // 
             // button4
             // 
             this.button4.BackColor = Color.FromArgb(79, 92, 109);
+            this.button4.Controls.Add(this.panel4);
             this.button4.Controls.Add(this.button_text4);
+            this.button4.Cursor = Cursors.Hand;
             this.button4.Location = new Point(10, 235);
             this.button4.Margin = new Padding(0, 0, 0, 5);
             this.button4.Name = "button4";
@@ -430,23 +474,34 @@
             this.button4.TabIndex = 4;
             this.button4.Click += this.button4_Click;
             // 
+            // panel4
+            // 
+            this.panel4.BackgroundImage = Properties.Resources.clock_rotate_left_white;
+            this.panel4.BackgroundImageLayout = ImageLayout.Zoom;
+            this.panel4.Location = new Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new Size(207, 38);
+            this.panel4.TabIndex = 2;
+            this.panel4.Click += this.button4_Click;
+            // 
             // button_text4
             // 
-            this.button_text4.AutoSize = true;
-            this.button_text4.Dock = DockStyle.Fill;
+            this.button_text4.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             this.button_text4.ForeColor = Color.White;
-            this.button_text4.Location = new Point(0, 0);
+            this.button_text4.Location = new Point(3, 44);
             this.button_text4.Name = "button_text4";
-            this.button_text4.Padding = new Padding(70, 25, 0, 25);
-            this.button_text4.Size = new Size(117, 65);
+            this.button_text4.Size = new Size(205, 25);
             this.button_text4.TabIndex = 0;
             this.button_text4.Text = "Pohyby";
+            this.button_text4.TextAlign = ContentAlignment.MiddleCenter;
             this.button_text4.Click += this.button4_Click;
             // 
             // button5
             // 
             this.button5.BackColor = Color.FromArgb(79, 92, 109);
+            this.button5.Controls.Add(this.panel5);
             this.button5.Controls.Add(this.button_text5);
+            this.button5.Cursor = Cursors.Hand;
             this.button5.Location = new Point(10, 310);
             this.button5.Margin = new Padding(0);
             this.button5.Name = "button5";
@@ -454,25 +509,34 @@
             this.button5.TabIndex = 5;
             this.button5.Click += this.button5_Click;
             // 
+            // panel5
+            // 
+            this.panel5.BackgroundImage = Properties.Resources.gears_white;
+            this.panel5.BackgroundImageLayout = ImageLayout.Zoom;
+            this.panel5.Location = new Point(3, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new Size(207, 38);
+            this.panel5.TabIndex = 2;
+            this.panel5.Click += this.button5_Click;
+            // 
             // button_text5
             // 
-            this.button_text5.AutoSize = true;
-            this.button_text5.Dock = DockStyle.Fill;
+            this.button_text5.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             this.button_text5.ForeColor = Color.White;
-            this.button_text5.Location = new Point(0, 0);
+            this.button_text5.Location = new Point(3, 44);
             this.button_text5.Name = "button_text5";
-            this.button_text5.Padding = new Padding(70, 25, 0, 25);
-            this.button_text5.Size = new Size(129, 65);
+            this.button_text5.Size = new Size(205, 25);
             this.button_text5.TabIndex = 0;
             this.button_text5.Text = "Nastavení";
+            this.button_text5.TextAlign = ContentAlignment.MiddleCenter;
             this.button_text5.Click += this.button5_Click;
             // 
             // under_button_holder
             // 
-            this.under_button_holder.BackgroundImage = (Image)resources.GetObject("under_button_holder.BackgroundImage");
+            this.under_button_holder.BackgroundImage = Properties.Resources.shelf;
             this.under_button_holder.BackgroundImageLayout = ImageLayout.Zoom;
             this.under_button_holder.Dock = DockStyle.Bottom;
-            this.under_button_holder.Location = new Point(0, 391);
+            this.under_button_holder.Location = new Point(0, 390);
             this.under_button_holder.Name = "under_button_holder";
             this.under_button_holder.Size = new Size(230, 113);
             this.under_button_holder.TabIndex = 1;
@@ -481,7 +545,6 @@
             // 
             this.openFileDialog1.Filter = "SQLite files (*.sqlite, *.sqlite3, *.db, *.db3, *.s3db, *.sl3)|*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3|All files (*.*)|*.*";
             this.openFileDialog1.RestoreDirectory = true;
-            this.openFileDialog1.FileOk += this.openFileDialog1_FileOk;
             // 
             // saveFileDialog1
             // 
@@ -494,13 +557,14 @@
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(23, 34, 52);
-            this.ClientSize = new Size(861, 550);
+            this.ClientSize = new Size(948, 549);
             this.Controls.Add(this.main_wrapper);
             this.Controls.Add(this.menu_left);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new Size(870, 588);
+            this.MinimumSize = new Size(964, 588);
             this.Name = "MainWindow";
             this.Text = "Skladový systém - BCSH1 Projekt | Václav Vellek";
             this.statusStrip1.ResumeLayout(false);
@@ -510,15 +574,10 @@
             this.menu_left.ResumeLayout(false);
             this.flow_button.ResumeLayout(false);
             this.button1.ResumeLayout(false);
-            this.button1.PerformLayout();
             this.button2.ResumeLayout(false);
-            this.button2.PerformLayout();
             this.button3.ResumeLayout(false);
-            this.button3.PerformLayout();
             this.button4.ResumeLayout(false);
-            this.button4.PerformLayout();
             this.button5.ResumeLayout(false);
-            this.button5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -560,20 +619,25 @@
         private Panel main_wrapper;
         private Panel menu_left;
         private FlowLayoutPanel flow_button;
-        private Panel button1;
+        private FlowLayoutPanel button1;
         private Label button_text1;
-        private Panel button2;
+        private FlowLayoutPanel button2;
         private Label button_text2;
-        private Panel button3;
+        private FlowLayoutPanel button3;
         private Label button_text3;
-        private Panel button4;
+        private FlowLayoutPanel button4;
         private Label button_text4;
-        private Panel button5;
+        private FlowLayoutPanel button5;
         private Label button_text5;
         private Panel under_button_holder;
         private ToolStripStatusLabel toolStripStatusLabel2;
         private ToolStripStatusLabel toolStripStatusLabel3;
         private OpenFileDialog openFileDialog1;
         private SaveFileDialog saveFileDialog1;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel3;
+        private Panel panel4;
+        private Panel panel5;
     }
 }

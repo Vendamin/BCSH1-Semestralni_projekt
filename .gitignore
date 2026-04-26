@@ -12,6 +12,7 @@
 *.env
 /*.jpg
 /images/
+/*.txt
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

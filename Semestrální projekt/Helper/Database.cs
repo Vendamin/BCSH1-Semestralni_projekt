@@ -74,8 +74,6 @@ namespace Semestrální_projekt
                     klic TEXT NOT NULL UNIQUE,
                     hodnota TEXT NOT NULL
                 );
-
-                INSERT OR IGNORE INTO nastaveni (klic, hodnota) VALUES ('maxPalet', '100');
             ";
             command.ExecuteNonQuery();
 

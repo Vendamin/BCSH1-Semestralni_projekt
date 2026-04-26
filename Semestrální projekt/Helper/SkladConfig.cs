@@ -11,11 +11,17 @@ public class SkladConfig {
     public bool SwitchPanelInteraction { get; set; }
     public Database DatabaseInstance { get; private set; } = null!;
     public string Theme { get; set; }
+    public string SelectedPane { get; set; }
+    public readonly MenuStrip MenuStripInstance;
+    public readonly StatusStrip StatusStripInstance;
 
-    public SkladConfig() {
+    public SkladConfig(MenuStrip MenuStripInstance, StatusStrip StatusStripInstance) {
         DatabasePath = Properties.Settings.Default.db_path ?? string.Empty;
         SwitchPanelInteraction = true;
         Theme = Properties.Settings.Default.theme ?? "dark";
+        SelectedPane = "dashboard";
+        this.MenuStripInstance = MenuStripInstance;
+        this.StatusStripInstance = StatusStripInstance;
     }
 
     public bool ValidateDatabasePath() {
@@ -51,19 +57,24 @@ public class SkladConfig {
             }
         }
 
+        var ss = StatusStripInstance?.Items.Find("stavDB", false)[0];
         if (DatabaseInstance != null) {
             System.Diagnostics.Debug.WriteLine("DatabaseInstance is already set.");
             return true;
         }
         if (!ValidateDatabasePath()) {
             System.Diagnostics.Debug.WriteLine("Invalid database path.");
+            ss.Text = "Nepřipojeno k databázi";
             return false;
         }
         DatabaseInstance = new Database(DatabasePath);
+        ss.Text = "Připojeno k databázi";
         return true;
     }
 
     public void DestroyDatabase() {
+        var ss = StatusStripInstance?.Items.Find("stavDB", false)[0];
+        ss.Text = "Nepřipojeno k databázi";
         DatabaseInstance = null!;
     }
 }

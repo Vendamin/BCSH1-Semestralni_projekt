@@ -117,4 +117,92 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="arrow-up-from-bracket_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-up-from-bracket_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow-up-from-bracket_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow-up-from-bracket_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boxes-packing_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boxes-packing_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boxes-packing_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boxes-packing_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boxes-stacked_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boxes-stacked_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boxes-stacked_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\boxes-stacked_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="box_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="box_single" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box_single.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="box_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cart-flatbed_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cart-flatbed_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cart-flatbed_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cart-flatbed_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clock-rotate-left_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clock-rotate-left_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clock-rotate-left_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clock-rotate-left_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="database_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database-solid black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="database_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\database-solid white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dolly" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dolly.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dolly_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dolly_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dolly_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dolly_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gears_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gears_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gears_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gears_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pallet_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pallet_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pallet_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pallet_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shelf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shelf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warehouse_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warehouse_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warehouse_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warehouse_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="window-maximize_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\window-maximize_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="window-maximize_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\window-maximize_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

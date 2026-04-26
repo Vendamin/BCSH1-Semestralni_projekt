@@ -32,6 +32,8 @@ namespace Semestrální_projekt
             jazykCombo.Items.Add("Čeština");
             jazykCombo.Items.Add("English");
 
+            typDatabaze.SelectedItem = typDatabaze.Items[0];
+
             switch (Properties.Settings.Default.lang) {
                 case "en":
                     jazykCombo.SelectedItem = "English";
@@ -45,18 +47,28 @@ namespace Semestrální_projekt
             motivCombo.SelectedItem = Properties.Settings.Default.theme == "dark" ? "Tmavý" : "Světlý";
             vychoziJednotka.SelectedItem = Properties.Settings.Default.def_metric;
 
+            casZmeny.Text = Properties.Settings.Default.last_saved.ToString("g");
+
             _config.DatabasePath = Properties.Settings.Default.db_path;
             cestaDb.Text = _config.DatabasePath;
 
             _config.InitializeDatabase(!firstLoad);
 
 
-            if (!_config.ValidateDatabaseConnection()) {
-                maxPocetPalet.Enabled = false;
+            if (_config.ValidateDatabaseConnection()) {
+                var conn = _config.DatabaseInstance.GetConnection();
+                
+                conn.Open();
+                var cmd = conn.CreateCommand();
+
+                cmd.CommandText = "SELECT hodnota FROM nastaveni WHERE klic = 'maxPalet' LIMIT 1";
+
+                var result = cmd.ExecuteScalar();
+
                 volnaMista.Text = "0";
             } else {
-                maxPocetPalet.Enabled = true;
-                volnaMista.Text = "999";
+
+                volnaMista.Text = "0";
             }
             checkDirty();
         }
@@ -72,6 +84,7 @@ namespace Semestrální_projekt
         private void button6_Click(object sender, EventArgs e) {
             if (openFileDialog?.ShowDialog() == DialogResult.OK) {
                 cestaDb.Text = openFileDialog.FileName;
+                System.Diagnostics.Debug.WriteLine(openFileDialog.FileName);
             }
         }
 

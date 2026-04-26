@@ -2,16 +2,19 @@ namespace Semestrální_projekt
 {
     public partial class MainWindow : Form {
         private readonly Dictionary<string, UserControl> _panelControls = new();
-        private SkladConfig _config = new();
+        private SkladConfig _config;
 
         public MainWindow() {
             InitializeComponent();
+            _config = new SkladConfig(menuStrip1, statusStrip1);
+
             InitializePanels();
 
             if (!_config.InitializeDatabase()) {
                 switchPanel("nastaveni", true);
-            } else {
-                switchPanel("dashboard");
+            }
+            else {
+                switchPanel("dashboard", true);
             }
         }
 
@@ -35,7 +38,14 @@ namespace Semestrální_projekt
             }
         }
 
-        public void switchPanel(String button, bool force = false) {
+        public void switchPanel(string button, bool force = false) {
+
+            System.Diagnostics.Debug.WriteLine($"switchPanel was called with button: {button}, force: {force.ToString()}");
+
+            if (!force && _config.SelectedPane == button) {
+                return;
+            }
+
             if (!force && !_config.SwitchPanelInteraction) {
                 MessageBox.Show("Dodělejte co dělate aby jste mohli měnit panely.");
                 System.Diagnostics.Debug.WriteLine("Panel switch interaction is currently disabled.");
@@ -48,6 +58,8 @@ namespace Semestrální_projekt
                     return;
                 }
             }
+
+            System.Diagnostics.Debug.WriteLine($"{button} opened");
 
             button1.BackColor = Color.FromArgb(79, 92, 109);
             button2.BackColor = Color.FromArgb(79, 92, 109);
@@ -79,40 +91,46 @@ namespace Semestrální_projekt
             else if (button == "nastaveni") {
                 button5.BackColor = Color.FromArgb(40, 118, 175);
             }
+
+            _config.SelectedPane = button;
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            System.Diagnostics.Debug.WriteLine("Dashboard opened");
             switchPanel("dashboard");
         }
 
         private void button2_Click(object sender, EventArgs e) {
-            System.Diagnostics.Debug.WriteLine("Palety opened");
             switchPanel("palety");
         }
 
         private void button3_Click(object sender, EventArgs e) {
-            System.Diagnostics.Debug.WriteLine("Příjem opened");
             switchPanel("prijem");
         }
 
         private void button4_Click(object sender, EventArgs e) {
-            System.Diagnostics.Debug.WriteLine("Pohyby opened");
             switchPanel("pohyby");
         }
 
         private void button5_Click(object sender, EventArgs e) {
-            System.Diagnostics.Debug.WriteLine("Nastavení opened");
             switchPanel("nastaveni");
         }
 
         private void oSoftwareToolStripMenuItem_Click(object sender, EventArgs e) {
-            AboutBox1 aboutBox = new AboutBox1();
+            AboutBox1 aboutBox = new();
             aboutBox.ShowDialog();
         }
 
-        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e) {
-            System.Diagnostics.Debug.WriteLine(openFileDialog1.FileName);
+        private void nastavitCestuKDatabázyToolStripMenuItem_Click(object sender, EventArgs e) {
+            switchPanel("nastaveni");
+        }
+
+        private void konecToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void definiceŘadARegálůToolStripMenuItem_Click(object sender, EventArgs e) {
+            warehouseConf wc = new();
+            wc.ShowDialog();
         }
     }
 }
