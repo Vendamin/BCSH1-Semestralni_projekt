@@ -13,19 +13,61 @@ namespace Semestrální_projekt;
 public partial class warehouseConf : Form {
     private readonly BindingList<DataViewItem> dataViewItems = [];
     private readonly BindingSource bindingSource = new();
+    private readonly SkladConfig _config;
 
-    public warehouseConf() {
+    public warehouseConf(SkladConfig config) {
+        this._config = config;
         InitializeComponent();
 
         dataGridView1.AutoGenerateColumns = false;
-        id.DisplayIndex = 0;
-        rada.DisplayIndex = 1;
-        sloupec.DisplayIndex = 2;
-        patro.DisplayIndex = 3;
-        akce.DisplayIndex = 4;
+        id.Visible = false;
+        rada.DisplayIndex = 0;
+        sloupec.DisplayIndex = 1;
+        patro.DisplayIndex = 2;
+        akce.DisplayIndex = 3;
 
         bindingSource.DataSource = dataViewItems;
         dataGridView1.DataSource = bindingSource;
+
+        LoadWarehouseConfiguration();
+        UpdatePositionCount();
+    }
+
+    private void UpdatePositionCount()
+    {
+        int totalPositions = dataViewItems.Sum(item => item.PocetPater * item.PocetSloupcu);
+        pocetPozic.Text = $"Počet pozic: {totalPositions}";
+    }
+
+    private void LoadWarehouseConfiguration()
+    {
+        try
+        {
+            var positions = _config.DatabaseInstance.GetAllWarehousePositions();
+            var groupedByRada = positions
+                .GroupBy(p => p.Item1)
+                .Select(g => new
+                {
+                    Rada = g.Key,
+                    MaxRegal = g.Max(p => p.Item2),
+                    MaxPatro = g.Max(p => p.Item3)
+                })
+                .ToList();
+
+            foreach (var group in groupedByRada)
+            {
+                pridatNovyZaznam(rada: group.Rada, pocetSloupcu: group.MaxRegal, pocetPater: group.MaxPatro);
+            }
+
+            if (groupedByRada.Any())
+            {
+                bindingSource.ResetBindings(false);
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Chyba při načítání konfigurace: {ex.Message}");
+        }
     }
 
     private void pridatNovyZaznam(string rada = "", int pocetPater = 0, int pocetSloupcu = 0, bool refresh = false) {
@@ -112,10 +154,83 @@ public partial class warehouseConf : Form {
         rady.Clear();
         pocetPater.Value = 1;
         pocetSloupcu.Value = 1;
+        UpdatePositionCount();
     }
 
     private void saveButton_Click(object sender, EventArgs e) {
-        this.Close();
+        try
+        {
+            var oldPositions = _config.DatabaseInstance.GetAllWarehousePositions();
+            var positionsWithProducts = _config.DatabaseInstance.GetPositionsWithProducts();
+
+            var newPositions = new List<(string Rada, int Regal, int Patro)>();
+
+            foreach (var item in dataViewItems) {
+                for (int patro = 1; patro <= item.PocetPater; patro++) {
+                    for (int regal = 1; regal <= item.PocetSloupcu; regal++) {
+                        newPositions.Add((item.Rada, regal, patro));
+                    }
+                }
+            }
+
+            var oldPositionsSet = new HashSet<(string, int, int)>(oldPositions);
+            var newPositionsSet = new HashSet<(string, int, int)>(newPositions);
+
+            var positionsToDelete = oldPositionsSet.Except(newPositionsSet).ToList();
+            var positionsToCreate = newPositionsSet.Except(oldPositionsSet).ToList();
+
+            var orphanedProducts = positionsToDelete
+                .Where(pos => positionsWithProducts.ContainsKey(pos))
+                .ToList();
+
+            if (orphanedProducts.Any())
+            {
+                var orphanedList = string.Join("\n", orphanedProducts
+                    .Select(pos => $"  - Řada {pos.Item1}, Regál {pos.Item2}, Patro {pos.Item3}: " +
+                        $"{positionsWithProducts[pos].Obsah} (Paleta #{positionsWithProducts[pos].PaletaId})"));
+
+                var result = MessageBox.Show(
+                    $"Následující pozice budou smazány a jejich produkty budou ztraceny:\n\n{orphanedList}\n\n" +
+                    "Opravdu chcete pokračovat?",
+                    "Upozornění – Ztráta dat",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result == DialogResult.No)
+                    return;
+            }
+
+            using var conn = _config.DatabaseInstance.GetConnection();
+            conn.Open();
+            using var transaction = conn.BeginTransaction();
+
+            try
+            {
+                if (positionsToDelete.Any())
+                {
+                    _config.DatabaseInstance.DeleteWarehousePositions(transaction, positionsToDelete);
+                }
+
+                if (positionsToCreate.Any())
+                {
+                    _config.DatabaseInstance.CreateWarehousePositions(transaction, positionsToCreate);
+                }
+
+                transaction.Commit();
+                MessageBox.Show("Konfigurace skladu byla úspěšně uložena.", "Úspěch", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                MessageBox.Show($"Chyba při ukládání: {ex.Message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Chyba: {ex.Message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
     private void cancelButton_Click(object sender, EventArgs e) {
@@ -138,6 +253,7 @@ public partial class warehouseConf : Form {
 
         dataViewItems.Remove(item);
         bindingSource.ResetBindings(false);
+        UpdatePositionCount();
     }
 }
 

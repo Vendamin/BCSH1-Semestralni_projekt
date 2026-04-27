@@ -46,7 +46,8 @@ namespace Semestrální_projekt
                     rada TEXT NOT NULL,
                     regal INTEGER NOT NULL,
                     patro INTEGER NOT NULL,
-                    stav TEXT NOT NULL
+                    stav TEXT NOT NULL DEFAULT 'empty',
+                    UNIQUE(rada,regal,patro)
                 );
 
                 CREATE TABLE IF NOT EXISTS palety (
@@ -78,6 +79,98 @@ namespace Semestrální_projekt
             command.ExecuteNonQuery();
 
             connection.Close();
+        }
+
+        public List<(string Rada, int Regal, int Patro)> GetAllWarehousePositions()
+        {
+            var positions = new List<(string Rada, int Regal, int Patro)>();
+            using var connection = GetConnection();
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = "SELECT rada, regal, patro FROM skladove_pozice ORDER BY rada, regal, patro;";
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                positions.Add((
+                    reader.GetString(0),
+                    reader.GetInt32(1),
+                    reader.GetInt32(2)
+                ));
+            }
+            return positions;
+        }
+
+        public Dictionary<(string Rada, int Regal, int Patro), (int PaletaId, string Obsah)> GetPositionsWithProducts()
+        {
+            var result = new Dictionary<(string Rada, int Regal, int Patro), (int, string)>();
+            using var connection = GetConnection();
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = @"
+                SELECT sp.rada, sp.regal, sp.patro, p.id, p.obsah
+                FROM skladove_pozice sp
+                LEFT JOIN palety p ON sp.id = p.skladova_pozice_id
+                WHERE p.id IS NOT NULL
+                ORDER BY sp.rada, sp.regal, sp.patro;";
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var position = (reader.GetString(0), reader.GetInt32(1), reader.GetInt32(2));
+                var paletaId = reader.GetInt32(3);
+                var obsah = reader.GetString(4);
+                result[position] = (paletaId, obsah);
+            }
+            return result;
+        }
+
+        public void DeleteWarehousePositions(SQLiteTransaction transaction, List<(string Rada, int Regal, int Patro)> positions)
+        {
+            if (!positions.Any())
+                return;
+
+            var connection = transaction.Connection;
+            using var command = connection.CreateCommand();
+            command.CommandText = @"
+                DELETE FROM skladove_pozice 
+                WHERE rada = @rada AND regal = @regal AND patro = @patro;";
+            command.Transaction = transaction;
+            
+            var radaParam = command.Parameters.Add("@rada", System.Data.DbType.String);
+            var regalParam = command.Parameters.Add("@regal", System.Data.DbType.Int32);
+            var patroParam = command.Parameters.Add("@patro", System.Data.DbType.Int32);
+
+            foreach (var (rada, regal, patro) in positions)
+            {
+                radaParam.Value = rada;
+                regalParam.Value = regal;
+                patroParam.Value = patro;
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void CreateWarehousePositions(SQLiteTransaction transaction, List<(string Rada, int Regal, int Patro)> positions)
+        {
+            if (!positions.Any())
+                return;
+
+            var connection = transaction.Connection;
+            using var command = connection.CreateCommand();
+            command.CommandText = @"
+                INSERT INTO skladove_pozice (rada, regal, patro, stav) 
+                VALUES (@rada, @regal, @patro, 'empty');";
+            command.Transaction = transaction;
+            
+            var radaParam = command.Parameters.Add("@rada", System.Data.DbType.String);
+            var regalParam = command.Parameters.Add("@regal", System.Data.DbType.Int32);
+            var patroParam = command.Parameters.Add("@patro", System.Data.DbType.Int32);
+
+            foreach (var (rada, regal, patro) in positions)
+            {
+                radaParam.Value = rada;
+                regalParam.Value = regal;
+                patroParam.Value = patro;
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

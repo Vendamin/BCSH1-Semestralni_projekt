@@ -129,8 +129,32 @@ namespace Semestrální_projekt
         }
 
         private void definiceŘadARegálůToolStripMenuItem_Click(object sender, EventArgs e) {
-            warehouseConf wc = new();
+            warehouseConf wc = new(_config);
             wc.ShowDialog();
+        }
+
+        private void seznamPoškozenýchPozicToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void novýPříjemToolStripMenuItem_Click(object sender, EventArgs e) {
+            switchPanel("prijem");
+        }
+
+        private void expediceToolStripMenuItem_Click(object sender, EventArgs e) {
+            switchPanel("prijem");
+        }
+
+        private void knihaPohýbůToolStripMenuItem_Click(object sender, EventArgs e) {
+            switchPanel("pohyby");
+        }
+
+        private void exportovatDataToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void importovatZCSVToolStripMenuItem_Click(object sender, EventArgs e) {
+
         }
     }
 }

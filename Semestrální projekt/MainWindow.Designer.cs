@@ -160,12 +160,14 @@
             this.exportovatDataToolStripMenuItem.Name = "exportovatDataToolStripMenuItem";
             this.exportovatDataToolStripMenuItem.Size = new Size(180, 22);
             this.exportovatDataToolStripMenuItem.Text = "Exportovat data";
+            this.exportovatDataToolStripMenuItem.Click += this.exportovatDataToolStripMenuItem_Click;
             // 
             // importovatZCSVToolStripMenuItem
             // 
             this.importovatZCSVToolStripMenuItem.Name = "importovatZCSVToolStripMenuItem";
             this.importovatZCSVToolStripMenuItem.Size = new Size(180, 22);
             this.importovatZCSVToolStripMenuItem.Text = "Importovat z CSV";
+            this.importovatZCSVToolStripMenuItem.Click += this.importovatZCSVToolStripMenuItem_Click;
             // 
             // konecToolStripMenuItem
             // 
@@ -199,6 +201,7 @@
             this.seznamPoškozenýchPozicToolStripMenuItem.Name = "seznamPoškozenýchPozicToolStripMenuItem";
             this.seznamPoškozenýchPozicToolStripMenuItem.Size = new Size(218, 22);
             this.seznamPoškozenýchPozicToolStripMenuItem.Text = "Seznam poškozených pozic";
+            this.seznamPoškozenýchPozicToolStripMenuItem.Click += this.seznamPoškozenýchPozicToolStripMenuItem_Click;
             // 
             // operaceToolStripMenuItem
             // 
@@ -212,12 +215,14 @@
             this.novýPříjemToolStripMenuItem.Name = "novýPříjemToolStripMenuItem";
             this.novýPříjemToolStripMenuItem.Size = new Size(186, 22);
             this.novýPříjemToolStripMenuItem.Text = "Nový příjem (Ctrl+N)";
+            this.novýPříjemToolStripMenuItem.Click += this.novýPříjemToolStripMenuItem_Click;
             // 
             // expediceToolStripMenuItem
             // 
             this.expediceToolStripMenuItem.Name = "expediceToolStripMenuItem";
             this.expediceToolStripMenuItem.Size = new Size(186, 22);
             this.expediceToolStripMenuItem.Text = "Expedice (Ctrl+E)";
+            this.expediceToolStripMenuItem.Click += this.expediceToolStripMenuItem_Click;
             // 
             // historieToolStripMenuItem
             // 
@@ -231,6 +236,7 @@
             this.knihaPohýbůToolStripMenuItem.Name = "knihaPohýbůToolStripMenuItem";
             this.knihaPohýbůToolStripMenuItem.Size = new Size(217, 22);
             this.knihaPohýbůToolStripMenuItem.Text = "Kniha pohybů";
+            this.knihaPohýbůToolStripMenuItem.Click += this.knihaPohýbůToolStripMenuItem_Click;
             // 
             // archivExpedovanýchPaletToolStripMenuItem
             // 
@@ -283,13 +289,13 @@
             this.tmavýToolStripMenuItem.Checked = true;
             this.tmavýToolStripMenuItem.CheckState = CheckState.Checked;
             this.tmavýToolStripMenuItem.Name = "tmavýToolStripMenuItem";
-            this.tmavýToolStripMenuItem.Size = new Size(108, 22);
+            this.tmavýToolStripMenuItem.Size = new Size(180, 22);
             this.tmavýToolStripMenuItem.Text = "Tmavý";
             // 
             // světlýToolStripMenuItem
             // 
             this.světlýToolStripMenuItem.Name = "světlýToolStripMenuItem";
-            this.světlýToolStripMenuItem.Size = new Size(108, 22);
+            this.světlýToolStripMenuItem.Size = new Size(180, 22);
             this.světlýToolStripMenuItem.Text = "Světlý";
             // 
             // zálohováníToolStripMenuItem
@@ -308,13 +314,13 @@
             // klávesovéZkratkyToolStripMenuItem
             // 
             this.klávesovéZkratkyToolStripMenuItem.Name = "klávesovéZkratkyToolStripMenuItem";
-            this.klávesovéZkratkyToolStripMenuItem.Size = new Size(166, 22);
+            this.klávesovéZkratkyToolStripMenuItem.Size = new Size(180, 22);
             this.klávesovéZkratkyToolStripMenuItem.Text = "Klávesové zkratky";
             // 
             // oSoftwareToolStripMenuItem
             // 
             this.oSoftwareToolStripMenuItem.Name = "oSoftwareToolStripMenuItem";
-            this.oSoftwareToolStripMenuItem.Size = new Size(166, 22);
+            this.oSoftwareToolStripMenuItem.Size = new Size(180, 22);
             this.oSoftwareToolStripMenuItem.Text = "O aplikaci";
             this.oSoftwareToolStripMenuItem.Click += this.oSoftwareToolStripMenuItem_Click;
             // 

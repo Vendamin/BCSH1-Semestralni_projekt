@@ -177,7 +177,7 @@ namespace Semestrální_projekt
             this.button6.ForeColor = Color.White;
             this.button6.Location = new Point(621, 46);
             this.button6.Name = "button6";
-            this.button6.Size = new Size(27, 29);
+            this.button6.Size = new Size(27, 23);
             this.button6.TabIndex = 3;
             this.button6.Text = "1";
             this.button6.UseVisualStyleBackColor = false;
@@ -245,7 +245,6 @@ namespace Semestrální_projekt
             // 
             // uiGroupBox
             // 
-            this.uiGroupBox.Controls.Add(this.panel6);
             this.uiGroupBox.Controls.Add(this.panel3);
             this.uiGroupBox.Dock = DockStyle.Fill;
             this.uiGroupBox.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
@@ -265,13 +264,14 @@ namespace Semestrální_projekt
             this.panel6.BackColor = Color.Transparent;
             this.panel6.BackgroundImage = Properties.Resources.window_maximize_white;
             this.panel6.BackgroundImageLayout = ImageLayout.Zoom;
-            this.panel6.Location = new Point(0, 28);
+            this.panel6.Location = new Point(0, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new Size(82, 72);
             this.panel6.TabIndex = 11;
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.panel6);
             this.panel3.Controls.Add(this.jazykCombo);
             this.panel3.Controls.Add(this.motivCombo);
             this.panel3.Controls.Add(this.label9);

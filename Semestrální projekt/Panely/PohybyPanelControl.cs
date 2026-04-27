@@ -1,9 +1,7 @@
 namespace Semestrální_projekt
 {
-    public partial class PohybyPanelControl : UserControl
-    {
-        public PohybyPanelControl()
-        {
+    public partial class PohybyPanelControl : UserControl {
+        public PohybyPanelControl() {
             InitializeComponent();
         }
     }
