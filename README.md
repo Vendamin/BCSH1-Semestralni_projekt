@@ -44,6 +44,6 @@
   * Rychlé formuláře pro naskladnění nové palety a její trvalé odstranění ze systému při expedici.
 
 ## Technologie
-* **Vývojové prostředí**: C# / .NET 9.0
+* **Vývojové prostředí**: C# / .NET 10.0
 * **GUI**: Windows Forms (WinForms)
 * **Databáze**: SQLite

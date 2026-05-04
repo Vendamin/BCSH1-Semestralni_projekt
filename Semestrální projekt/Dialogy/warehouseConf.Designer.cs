@@ -1,6 +1,6 @@
 ﻿namespace Semestrální_projekt;
 
-partial class warehouseConf {
+partial class WarehouseConf {
     /// <summary>
     /// Required designer variable.
     /// </summary>
@@ -75,32 +75,44 @@ partial class warehouseConf {
         // 
         // pocetPozic
         // 
-        this.pocetPozic.AutoSize = true;
+        this.pocetPozic.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        this.pocetPozic.Font = new Font("Segoe UI", 13F);
         this.pocetPozic.ForeColor = Color.White;
-        this.pocetPozic.Location = new Point(414, 13);
+        this.pocetPozic.Location = new Point(0, 12);
         this.pocetPozic.Name = "pocetPozic";
-        this.pocetPozic.Size = new Size(65, 15);
+        this.pocetPozic.Size = new Size(371, 53);
         this.pocetPozic.TabIndex = 2;
         this.pocetPozic.Text = "pocetPozic";
+        this.pocetPozic.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // saveButton
         // 
-        this.saveButton.Location = new Point(367, 42);
+        this.saveButton.BackColor = Color.FromArgb(46, 99, 142);
+        this.saveButton.FlatAppearance.BorderColor = Color.FromArgb(46, 99, 142);
+        this.saveButton.FlatStyle = FlatStyle.Flat;
+        this.saveButton.Font = new Font("Segoe UI", 11F);
+        this.saveButton.ForeColor = Color.White;
+        this.saveButton.Location = new Point(377, 32);
         this.saveButton.Name = "saveButton";
-        this.saveButton.Size = new Size(75, 23);
+        this.saveButton.Size = new Size(65, 33);
         this.saveButton.TabIndex = 1;
         this.saveButton.Text = "Uložit";
-        this.saveButton.UseVisualStyleBackColor = true;
+        this.saveButton.UseVisualStyleBackColor = false;
         this.saveButton.Click += this.saveButton_Click;
         // 
         // cancelButton
         // 
-        this.cancelButton.Location = new Point(455, 42);
+        this.cancelButton.BackColor = Color.FromArgb(68, 77, 84);
+        this.cancelButton.FlatAppearance.BorderColor = Color.FromArgb(68, 77, 84);
+        this.cancelButton.FlatStyle = FlatStyle.Flat;
+        this.cancelButton.Font = new Font("Segoe UI", 11F);
+        this.cancelButton.ForeColor = Color.White;
+        this.cancelButton.Location = new Point(455, 32);
         this.cancelButton.Name = "cancelButton";
-        this.cancelButton.Size = new Size(75, 23);
+        this.cancelButton.Size = new Size(75, 33);
         this.cancelButton.TabIndex = 0;
         this.cancelButton.Text = "Zrušit";
-        this.cancelButton.UseVisualStyleBackColor = true;
+        this.cancelButton.UseVisualStyleBackColor = false;
         this.cancelButton.Click += this.cancelButton_Click;
         // 
         // panel2
@@ -300,6 +312,9 @@ partial class warehouseConf {
         this.dataGridView1.Size = new Size(398, 230);
         this.dataGridView1.TabIndex = 5;
         this.dataGridView1.CellContentClick += this.odebratZaznamButton_Click;
+        this.dataGridView1.RowsRemoved += this.dataGridView1_UserDeletingRow;
+        this.dataGridView1.UserDeletedRow += this.dataGridView1_UserDeletingRow;
+        this.dataGridView1.UserDeletingRow += this.dataGridView1_UserDeletingRow;
         // 
         // id
         // 
@@ -358,7 +373,6 @@ partial class warehouseConf {
         this.StartPosition = FormStartPosition.CenterParent;
         this.Text = "Konfigurace Řad a Regálů";
         this.panel1.ResumeLayout(false);
-        this.panel1.PerformLayout();
         this.panel2.ResumeLayout(false);
         this.flowLayoutPanel1.ResumeLayout(false);
         this.flowLayoutPanel1.PerformLayout();

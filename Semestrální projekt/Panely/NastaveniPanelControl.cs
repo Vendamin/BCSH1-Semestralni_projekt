@@ -1,6 +1,6 @@
 namespace Semestrální_projekt
 {
-    public partial class NastaveniPanelControl : UserControl {
+    public partial class NastaveniPanelControl : UserControl, IRefreshable {
         private OpenFileDialog? openFileDialog;
         private SaveFileDialog? saveFileDialog;
         private SkladConfig _config;
@@ -54,22 +54,6 @@ namespace Semestrální_projekt
 
             _config.InitializeDatabase(!firstLoad);
 
-
-            if (_config.ValidateDatabaseConnection()) {
-                var conn = _config.DatabaseInstance.GetConnection();
-                
-                conn.Open();
-                var cmd = conn.CreateCommand();
-
-                cmd.CommandText = "SELECT hodnota FROM nastaveni WHERE klic = 'maxPalet' LIMIT 1";
-
-                var result = cmd.ExecuteScalar();
-
-                volnaMista.Text = "0";
-            } else {
-
-                volnaMista.Text = "0";
-            }
             checkDirty();
         }
 
@@ -104,6 +88,10 @@ namespace Semestrální_projekt
 
             Properties.Settings.Default.last_saved = DateTime.Now;
             Properties.Settings.Default.Save();
+
+            //TODO!
+            Application.Restart();
+
             load_settings();
         }
 
@@ -139,6 +127,26 @@ namespace Semestrální_projekt
         private void nastaveniVytvoritBtn_Click(object sender, EventArgs e) {
             if (saveFileDialog?.ShowDialog() == DialogResult.OK) {
                 cestaDb.Text = saveFileDialog.FileName;
+            }
+        }
+
+        public void RefreshData()
+        {
+            if (_config.ValidateDatabaseConnection())
+            {
+                var conn = _config.DatabaseInstance.GetConnection();
+
+                conn.Open();
+                var cmd = conn.CreateCommand();
+
+                cmd.CommandText = "SELECT COUNT(*) FROM skladove_pozice WHERE stav = 'empty';";
+
+                volnaMista.Text = cmd.ExecuteScalar()?.ToString() ?? "0";
+            }
+            else
+            {
+
+                volnaMista.Text = "0";
             }
         }
     }

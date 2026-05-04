@@ -55,7 +55,7 @@ namespace Semestrální_projekt
                     obsah TEXT NOT NULL,
                     pocet_kusu INTEGER NOT NULL,
                     hmotnost REAL NOT NULL,
-                    skladova_pozice_id INTEGER NOT NULL UNIQUE,
+                    skladova_pozice_id INTEGER UNIQUE,
                     FOREIGN KEY (skladova_pozice_id) REFERENCES skladove_pozice(id)
                 );
 
@@ -171,6 +171,66 @@ namespace Semestrální_projekt
                 patroParam.Value = patro;
                 command.ExecuteNonQuery();
             }
+        }
+
+        public List<Paleta> GetAllPalety()
+        {
+            var palety = new List<Paleta>();
+            using var connection = GetConnection();
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = @"
+                SELECT p.id, p.obsah, p.pocet_kusu, p.hmotnost, sp.rada, sp.regal, sp.patro
+                FROM palety p
+                LEFT JOIN skladove_pozice sp ON p.skladova_pozice_id = sp.id;";
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                SkladovaPozice? pozice = null;
+                if (!reader.IsDBNull(4))
+                {
+                    pozice = new SkladovaPozice(reader.GetString(4), reader.GetInt32(5), reader.GetInt32(6));
+                }
+                palety.Add(new Paleta(
+                    reader.GetInt64(0),
+                    reader.GetString(1),
+                    reader.GetInt32(2),
+                    (float)reader.GetDouble(3),
+                    pozice
+                ));
+            }
+            return palety;
+        }
+
+        public long AddPaleta(Paleta paleta)
+        {
+            using var connection = GetConnection();
+            connection.Open();
+            using var command = connection.CreateCommand();
+            
+            command.CommandText = @"
+                INSERT INTO palety (obsah, pocet_kusu, hmotnost)
+                VALUES (@obsah, @pocet_kusu, @hmotnost);
+                SELECT last_insert_rowid();";
+            
+            command.Parameters.AddWithValue("@obsah", paleta.Obsah);
+            command.Parameters.AddWithValue("@pocet_kusu", paleta.PocetKusu);
+            command.Parameters.AddWithValue("@hmotnost", paleta.Hmotnost);
+            
+            return (long)command.ExecuteScalar();
+        }
+        public bool DeletePaleta(long paletaId) {
+            using var connection = GetConnection();
+            connection.Open();
+            using var command = connection.CreateCommand();
+
+            command.CommandText = @"
+                DELETE FROM palety 
+                WHERE id = @id;";
+
+            command.Parameters.AddWithValue("@id", paletaId);
+
+            return command.ExecuteNonQuery() > 0;
         }
     }
 }

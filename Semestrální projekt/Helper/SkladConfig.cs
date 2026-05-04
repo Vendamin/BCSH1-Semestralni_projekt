@@ -11,7 +11,7 @@ public class SkladConfig {
     public bool SwitchPanelInteraction { get; set; }
     public Database DatabaseInstance { get; private set; } = null!;
     public string Theme { get; set; }
-    public string SelectedPane { get; set; }
+    public string SelectedPanel { get; set; }
     public readonly MenuStrip MenuStripInstance;
     public readonly StatusStrip StatusStripInstance;
 
@@ -19,7 +19,7 @@ public class SkladConfig {
         DatabasePath = Properties.Settings.Default.db_path ?? string.Empty;
         SwitchPanelInteraction = true;
         Theme = Properties.Settings.Default.theme ?? "dark";
-        SelectedPane = "dashboard";
+        SelectedPanel = "dashboard";
         this.MenuStripInstance = MenuStripInstance;
         this.StatusStripInstance = StatusStripInstance;
     }
@@ -48,8 +48,8 @@ public class SkladConfig {
     public bool InitializeDatabase(bool first = false) {
         if (first) {
             // check if DatabasePath exists
-            if (!File.Exists(DatabasePath)) {
-                MessageBox.Show("Uložená cesta k souboru s databází nebyl nalezen.");
+            if (DatabasePath != null && !File.Exists(DatabasePath)) {
+                MessageBox.Show("Uložená cesta k souboru s databází nebyla nalezena.");
                 System.Diagnostics.Debug.WriteLine("File not found!");
                 Properties.Settings.Default.db_path = String.Empty;
                 Properties.Settings.Default.Save();
@@ -57,24 +57,21 @@ public class SkladConfig {
             }
         }
 
-        var ss = StatusStripInstance?.Items.Find("stavDB", false)[0];
         if (DatabaseInstance != null) {
             System.Diagnostics.Debug.WriteLine("DatabaseInstance is already set.");
             return true;
         }
         if (!ValidateDatabasePath()) {
             System.Diagnostics.Debug.WriteLine("Invalid database path.");
-            ss.Text = "Nepřipojeno k databázi";
             return false;
         }
-        DatabaseInstance = new Database(DatabasePath);
-        ss.Text = "Připojeno k databázi";
+        DatabaseInstance = DatabasePath != null ? new Database(DatabasePath) : null!;
+
         return true;
     }
 
     public void DestroyDatabase() {
-        var ss = StatusStripInstance?.Items.Find("stavDB", false)[0];
-        ss.Text = "Nepřipojeno k databázi";
+        
         DatabaseInstance = null!;
     }
 }

@@ -2,8 +2,10 @@ namespace Semestrální_projekt
 {
     public partial class PrijemPanelControl : UserControl
     {
-        public PrijemPanelControl()
+        private SkladConfig _config;
+        public PrijemPanelControl(SkladConfig config)
         {
+            _config = config;
             InitializeComponent();
         }
     }

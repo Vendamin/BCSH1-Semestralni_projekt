@@ -16,21 +16,27 @@ namespace Semestrální_projekt
             else {
                 switchPanel("dashboard", true);
             }
+
+            UpdateStatusBar();
         }
 
         private void InitializePanels() {
-            var dashboardPanel = new DashboardPanelControl();
-            var paletyPanel = new PaletyPanelControl();
-            var prijemPanel = new PrijemPanelControl();
-            var pohybyPanel = new PohybyPanelControl();
             var nastaveniPanel = new NastaveniPanelControl(_config);
             nastaveniPanel.SetOpenFileDialog(openFileDialog1);
             nastaveniPanel.SetSaveFileDialog(saveFileDialog1);
+            
+            if (_config.DatabaseInstance != null)
+            {
+                var dashboardPanel = new DashboardPanelControl(_config);
+                var paletyPanel = new PaletyPanelControl(_config);
+                var prijemPanel = new PrijemPanelControl(_config);
+                var pohybyPanel = new PohybyPanelControl(_config);
+                _panelControls["dashboard"] = dashboardPanel;
+                _panelControls["palety"] = paletyPanel;
+                _panelControls["prijem"] = prijemPanel;
+                _panelControls["pohyby"] = pohybyPanel;
+            }
 
-            _panelControls["dashboard"] = dashboardPanel;
-            _panelControls["palety"] = paletyPanel;
-            _panelControls["prijem"] = prijemPanel;
-            _panelControls["pohyby"] = pohybyPanel;
             _panelControls["nastaveni"] = nastaveniPanel;
 
             foreach (var panel in _panelControls.Values) {
@@ -42,7 +48,7 @@ namespace Semestrální_projekt
 
             System.Diagnostics.Debug.WriteLine($"switchPanel was called with button: {button}, force: {force.ToString()}");
 
-            if (!force && _config.SelectedPane == button) {
+            if (!force && _config.SelectedPanel == button) {
                 return;
             }
 
@@ -76,6 +82,10 @@ namespace Semestrální_projekt
             main_wrapper.Controls.Add(selectedPanel);
             main_wrapper.ResumeLayout();
 
+            if (selectedPanel is IRefreshable refreshablePanel) {
+                refreshablePanel.RefreshData();
+            }
+
             if (button == "dashboard") {
                 button1.BackColor = Color.FromArgb(40, 118, 175);
             }
@@ -92,7 +102,31 @@ namespace Semestrální_projekt
                 button5.BackColor = Color.FromArgb(40, 118, 175);
             }
 
-            _config.SelectedPane = button;
+            _config.SelectedPanel = button;
+            UpdateStatusBar();
+        }
+
+        public void UpdateStatusBar()
+        {
+            var ss = statusStrip1.Items.Find("stavDB", false)[0];
+            if (_config.DatabaseInstance != null) {
+                ss.Text = "Připojeno k databázi";
+                var conn = _config.DatabaseInstance.GetConnection();
+
+                conn.Open();
+                var cmd = conn.CreateCommand();
+
+                cmd.CommandText = "SELECT COUNT(*) FROM skladove_pozice WHERE stav = 'empty';";
+                
+                cmd.ExecuteNonQuery();
+
+                pocetVolnychMistText.Text = cmd.ExecuteScalar()?.ToString() ?? "0";
+
+            }
+            else {
+                ss.Text = "Nepřipojeno k databázi";
+                pocetVolnychMistText.Text = "0";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -129,7 +163,7 @@ namespace Semestrální_projekt
         }
 
         private void definiceŘadARegálůToolStripMenuItem_Click(object sender, EventArgs e) {
-            warehouseConf wc = new(_config);
+            WarehouseConf wc = new(_config);
             wc.ShowDialog();
         }
 

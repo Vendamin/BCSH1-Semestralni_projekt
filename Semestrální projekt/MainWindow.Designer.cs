@@ -158,21 +158,21 @@
             // exportovatDataToolStripMenuItem
             // 
             this.exportovatDataToolStripMenuItem.Name = "exportovatDataToolStripMenuItem";
-            this.exportovatDataToolStripMenuItem.Size = new Size(180, 22);
+            this.exportovatDataToolStripMenuItem.Size = new Size(165, 22);
             this.exportovatDataToolStripMenuItem.Text = "Exportovat data";
             this.exportovatDataToolStripMenuItem.Click += this.exportovatDataToolStripMenuItem_Click;
             // 
             // importovatZCSVToolStripMenuItem
             // 
             this.importovatZCSVToolStripMenuItem.Name = "importovatZCSVToolStripMenuItem";
-            this.importovatZCSVToolStripMenuItem.Size = new Size(180, 22);
+            this.importovatZCSVToolStripMenuItem.Size = new Size(165, 22);
             this.importovatZCSVToolStripMenuItem.Text = "Importovat z CSV";
             this.importovatZCSVToolStripMenuItem.Click += this.importovatZCSVToolStripMenuItem_Click;
             // 
             // konecToolStripMenuItem
             // 
             this.konecToolStripMenuItem.Name = "konecToolStripMenuItem";
-            this.konecToolStripMenuItem.Size = new Size(180, 22);
+            this.konecToolStripMenuItem.Size = new Size(165, 22);
             this.konecToolStripMenuItem.Text = "Konec";
             this.konecToolStripMenuItem.Click += this.konecToolStripMenuItem_Click;
             // 
@@ -289,13 +289,13 @@
             this.tmavýToolStripMenuItem.Checked = true;
             this.tmavýToolStripMenuItem.CheckState = CheckState.Checked;
             this.tmavýToolStripMenuItem.Name = "tmavýToolStripMenuItem";
-            this.tmavýToolStripMenuItem.Size = new Size(180, 22);
+            this.tmavýToolStripMenuItem.Size = new Size(108, 22);
             this.tmavýToolStripMenuItem.Text = "Tmavý";
             // 
             // světlýToolStripMenuItem
             // 
             this.světlýToolStripMenuItem.Name = "světlýToolStripMenuItem";
-            this.světlýToolStripMenuItem.Size = new Size(180, 22);
+            this.světlýToolStripMenuItem.Size = new Size(108, 22);
             this.světlýToolStripMenuItem.Text = "Světlý";
             // 
             // zálohováníToolStripMenuItem
@@ -314,13 +314,13 @@
             // klávesovéZkratkyToolStripMenuItem
             // 
             this.klávesovéZkratkyToolStripMenuItem.Name = "klávesovéZkratkyToolStripMenuItem";
-            this.klávesovéZkratkyToolStripMenuItem.Size = new Size(180, 22);
+            this.klávesovéZkratkyToolStripMenuItem.Size = new Size(166, 22);
             this.klávesovéZkratkyToolStripMenuItem.Text = "Klávesové zkratky";
             // 
             // oSoftwareToolStripMenuItem
             // 
             this.oSoftwareToolStripMenuItem.Name = "oSoftwareToolStripMenuItem";
-            this.oSoftwareToolStripMenuItem.Size = new Size(180, 22);
+            this.oSoftwareToolStripMenuItem.Size = new Size(166, 22);
             this.oSoftwareToolStripMenuItem.Text = "O aplikaci";
             this.oSoftwareToolStripMenuItem.Click += this.oSoftwareToolStripMenuItem_Click;
             // 
@@ -373,6 +373,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new Size(210, 70);
             this.button1.TabIndex = 1;
+            this.button1.TabStop = true;
             this.button1.Click += this.button1_Click;
             // 
             // panel1
@@ -408,6 +409,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new Size(210, 70);
             this.button2.TabIndex = 2;
+            this.button2.TabStop = true;
             this.button2.Click += this.button2_Click;
             // 
             // panel2
@@ -443,6 +445,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new Size(210, 70);
             this.button3.TabIndex = 3;
+            this.button3.TabStop = true;
             this.button3.Click += this.button3_Click;
             // 
             // panel3
@@ -478,6 +481,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new Size(210, 70);
             this.button4.TabIndex = 4;
+            this.button4.TabStop = true;
             this.button4.Click += this.button4_Click;
             // 
             // panel4
@@ -513,6 +517,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new Size(210, 70);
             this.button5.TabIndex = 5;
+            this.button5.TabStop = true;
             this.button5.Click += this.button5_Click;
             // 
             // panel5

@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace Semestrální_projekt;
 
-public partial class warehouseConf : Form {
-    private readonly BindingList<DataViewItem> dataViewItems = [];
+public partial class WarehouseConf : Form {
+    private readonly BindingList<SkladovaPozice> dataViewItems = [];
     private readonly BindingSource bindingSource = new();
     private readonly SkladConfig _config;
 
-    public warehouseConf(SkladConfig config) {
+    public WarehouseConf(SkladConfig config) {
         this._config = config;
         InitializeComponent();
 
@@ -33,39 +33,32 @@ public partial class warehouseConf : Form {
         UpdatePositionCount();
     }
 
-    private void UpdatePositionCount()
-    {
+    private void UpdatePositionCount() {
         int totalPositions = dataViewItems.Sum(item => item.PocetPater * item.PocetSloupcu);
-        pocetPozic.Text = $"Počet pozic: {totalPositions}";
+        pocetPozic.Text = $"Celkový počet fyzických pozic: {totalPositions}";
     }
 
-    private void LoadWarehouseConfiguration()
-    {
-        try
-        {
+    private void LoadWarehouseConfiguration() {
+        try {
             var positions = _config.DatabaseInstance.GetAllWarehousePositions();
             var groupedByRada = positions
                 .GroupBy(p => p.Item1)
-                .Select(g => new
-                {
+                .Select(g => new {
                     Rada = g.Key,
                     MaxRegal = g.Max(p => p.Item2),
                     MaxPatro = g.Max(p => p.Item3)
                 })
                 .ToList();
 
-            foreach (var group in groupedByRada)
-            {
+            foreach (var group in groupedByRada) {
                 pridatNovyZaznam(rada: group.Rada, pocetSloupcu: group.MaxRegal, pocetPater: group.MaxPatro);
             }
 
-            if (groupedByRada.Any())
-            {
+            if (groupedByRada.Any()) {
                 bindingSource.ResetBindings(false);
             }
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             System.Diagnostics.Debug.WriteLine($"Chyba při načítání konfigurace: {ex.Message}");
         }
     }
@@ -82,24 +75,24 @@ public partial class warehouseConf : Form {
                 }
 
                 foreach (string zaznamInside in ExpandAlphabetRange(range[0], range[1])) {
-                    DataViewItem? existing = dataViewItems.FirstOrDefault(item => item.Rada == zaznamInside);
+                    SkladovaPozice? existing = dataViewItems.FirstOrDefault(item => item.Rada == zaznamInside);
                     if (existing is not null) {
                         existing.PocetPater = pocetPater;
                         existing.PocetSloupcu = pocetSloupcu;
                     }
                     else {
-                        dataViewItems.Add(new DataViewItem(zaznamInside, pocetPater, pocetSloupcu));
+                        dataViewItems.Add(new SkladovaPozice(zaznamInside, pocetPater, pocetSloupcu));
                     }
                 }
             }
             else {
-                DataViewItem? existing = dataViewItems.FirstOrDefault(item => item.Rada == zaznam);
+                SkladovaPozice? existing = dataViewItems.FirstOrDefault(item => item.Rada == zaznam);
                 if (existing is not null) {
                     existing.PocetPater = pocetPater;
                     existing.PocetSloupcu = pocetSloupcu;
                 }
                 else {
-                    dataViewItems.Add(new DataViewItem(zaznam, pocetPater, pocetSloupcu));
+                    dataViewItems.Add(new SkladovaPozice(zaznam, pocetPater, pocetSloupcu));
                 }
             }
         }
@@ -158,8 +151,7 @@ public partial class warehouseConf : Form {
     }
 
     private void saveButton_Click(object sender, EventArgs e) {
-        try
-        {
+        try {
             var oldPositions = _config.DatabaseInstance.GetAllWarehousePositions();
             var positionsWithProducts = _config.DatabaseInstance.GetPositionsWithProducts();
 
@@ -183,8 +175,7 @@ public partial class warehouseConf : Form {
                 .Where(pos => positionsWithProducts.ContainsKey(pos))
                 .ToList();
 
-            if (orphanedProducts.Any())
-            {
+            if (orphanedProducts.Any()) {
                 var orphanedList = string.Join("\n", orphanedProducts
                     .Select(pos => $"  - Řada {pos.Item1}, Regál {pos.Item2}, Patro {pos.Item3}: " +
                         $"{positionsWithProducts[pos].Obsah} (Paleta #{positionsWithProducts[pos].PaletaId})"));
@@ -205,15 +196,12 @@ public partial class warehouseConf : Form {
             conn.Open();
             using var transaction = conn.BeginTransaction();
 
-            try
-            {
-                if (positionsToDelete.Any())
-                {
+            try {
+                if (positionsToDelete.Any()) {
                     _config.DatabaseInstance.DeleteWarehousePositions(transaction, positionsToDelete);
                 }
 
-                if (positionsToCreate.Any())
-                {
+                if (positionsToCreate.Any()) {
                     _config.DatabaseInstance.CreateWarehousePositions(transaction, positionsToCreate);
                 }
 
@@ -221,14 +209,12 @@ public partial class warehouseConf : Form {
                 MessageBox.Show("Konfigurace skladu byla úspěšně uložena.", "Úspěch", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 transaction.Rollback();
                 MessageBox.Show($"Chyba při ukládání: {ex.Message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             MessageBox.Show($"Chyba: {ex.Message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -246,7 +232,7 @@ public partial class warehouseConf : Form {
             return;
         }
 
-        DataViewItem? item = dataGridView1.Rows[e.RowIndex].DataBoundItem as DataViewItem;
+        SkladovaPozice? item = dataGridView1.Rows[e.RowIndex].DataBoundItem as SkladovaPozice;
         if (item is null) {
             return;
         }
@@ -255,24 +241,8 @@ public partial class warehouseConf : Form {
         bindingSource.ResetBindings(false);
         UpdatePositionCount();
     }
-}
 
-partial class DataViewItem {
-    public int Id { get; set; }
-    public string Rada { get; set; } = "";
-    public int PocetPater { get; set; }
-    public int PocetSloupcu { get; set; }
-
-    public DataViewItem(int id, string rada, int pocetPater, int pocetSloupcu) {
-        this.Id = id;
-        this.Rada = rada;
-        this.PocetPater = pocetPater;
-        this.PocetSloupcu = pocetSloupcu;
-    }
-
-    public DataViewItem(string rada, int pocetPater, int pocetSloupcu) {
-        this.Rada = rada;
-        this.PocetPater = pocetPater;   
-        this.PocetSloupcu = pocetSloupcu;
+    private void dataGridView1_UserDeletingRow(object sender, EventArgs e) {
+        UpdatePositionCount();
     }
 }
